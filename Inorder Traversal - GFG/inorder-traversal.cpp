@@ -37,9 +37,22 @@ class Solution {
     {
         if(!root)
         return ans;
-        inOrder(root->left);
-        ans.push_back(root->data);
-        inOrder(root->right);
+        stack<Node*>s;
+        while(root || !s.empty())
+        {
+            if(root)
+            {
+                s.push(root);
+                root=root->left;
+            }
+            else
+            {
+                root=s.top();
+                s.pop();
+                ans.push_back(root->data);
+                root=root->right;
+            }
+        }
         return ans;
     }
 };
