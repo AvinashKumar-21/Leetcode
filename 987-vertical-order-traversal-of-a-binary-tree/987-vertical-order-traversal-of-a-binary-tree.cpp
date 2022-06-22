@@ -12,6 +12,7 @@
 class Solution {
 public:
     map<int,map<int,multiset<int>>>map;
+
     void mapping(TreeNode*root,int x,int y)
     {
         if(!root)
@@ -31,7 +32,7 @@ public:
             vector<int>a;
             for(auto j:i.second)
                 for(auto k:j.second)
-                a.push_back(k);
+                    a.push_back(k);
             ans.push_back(a);
         }
         return ans;
