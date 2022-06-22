@@ -114,6 +114,8 @@ bool check(Node*root)
 }
 void left(Node*root)
 {
+    if(!root)
+    return;
     while(root)
     {
         if(!check(root))
@@ -127,15 +129,16 @@ void left(Node*root)
 void leaf(Node*root)
 {
     if(!root)
-    return;
+    return ;
     if(check(root))
     ans.push_back(root->data);
-    
     leaf(root->left);
     leaf(root->right);
 }
 void right(Node*root)
 {
+    if(!root)
+    return;
     vector<int>a;
     while(root)
     {
@@ -147,7 +150,8 @@ void right(Node*root)
         root=root->left;
     }
     for(int i=a.size()-1;i>=0;i--)
-        ans.push_back(a[i]);
+    ans.push_back(a[i]);
+    
 }
     vector <int> boundary(Node *root)
     {
