@@ -23,10 +23,11 @@ public:
         if(!root)
             return ;
         a.push_back(root->val);
-        if(check(root) && sum==root->val)
-            ans.push_back(a);
+        
         fun(root->left,sum-root->val,a);
         fun(root->right,sum-root->val,a);
+        if(check(root) && sum==root->val)
+            ans.push_back(a);
         
     }
     vector<vector<int>> pathSum(TreeNode* root, int t) 
