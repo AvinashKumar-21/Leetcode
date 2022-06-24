@@ -14,25 +14,23 @@ public:
     vector<string>ans;
     bool check(TreeNode*root)
     {
-        if(!root->left && !root->right)
+        if(!root->left&& !root->right)
             return true;
         return false;
     }
-    string fun(TreeNode*root,string s)
+    void fun(TreeNode*root,string s)
     {
         if(!root)
-            return s;
+            return;
         s.append(to_string(root->val)+"->");
         if(check(root))
         {
             for(int i=0;i<2;i++)
             s.pop_back();
             ans.push_back(s);
-            return s;
         }
         fun(root->left,s);
         fun(root->right,s);
-        return s;
     }
     vector<string> binaryTreePaths(TreeNode* root) 
     {
