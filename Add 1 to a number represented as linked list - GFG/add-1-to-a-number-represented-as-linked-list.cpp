@@ -46,21 +46,22 @@ struct Node
 class Solution
 {
     public:
-    int c=0;
     int a=1;
-    void fun(Node*head)
+    int c=0;
+    Node*fun(Node*head)
     {
         if(!head)
-        return ;
-        addOne(head->next);
+        return head;
+        fun(head->next);
         head->data=head->data+a+c;
         c=head->data/10;
         head->data=head->data%10;
         a=0;
+        return head;
     }
     Node* addOne(Node *head) 
     {
-        fun(head);
+        head=fun(head);
         if(c!=0)
         {
             Node*temp=new Node(c);
@@ -68,6 +69,8 @@ class Solution
             return temp;
         }
         return head;
+        // Your Code here
+        // return head of list after adding one
     }
 };
 
