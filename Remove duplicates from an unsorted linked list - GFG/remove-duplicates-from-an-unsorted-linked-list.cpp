@@ -40,14 +40,12 @@ struct Node {
 class Solution
 {
     public:
-    //Function to remove duplicates from unsorted linked list.
-    Node * removeDuplicates( Node *head) 
+    
+        Node * removeDuplicates( Node *head) 
     {
-        if(!head || !head->next)
-        return head;
-        unordered_set<int>s;
         Node*temp=new Node(-1);
-        Node*link=temp;
+        Node*trail=temp;
+        set<int>s;
         while(head)
         {
             Node*p=head->next;
@@ -55,8 +53,8 @@ class Solution
             if(s.find(head->data)==s.end())
             {
                 s.insert(head->data);
-                link->next=head;
-                link=link->next;
+                trail->next=head;
+                trail=trail->next;
             }
             head=p;
         }
