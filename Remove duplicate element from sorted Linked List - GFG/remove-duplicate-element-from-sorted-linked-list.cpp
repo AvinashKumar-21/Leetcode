@@ -68,18 +68,19 @@ struct Node {
 Node *removeDuplicates(Node *head)
 {
     Node*temp=new Node(-1);
-    Node*t=temp;
+    Node*trail=temp;
     while(head)
     {
         Node*p=head->next;
         head->next=NULL;
-        if(t->data!=head->data)
+        if(head->data!=trail->data)
         {
-            t->next=head;
-            t=t->next;
+            trail->next=head;
+            trail=trail->next;
         }
         head=p;
     }
     return temp->next;
- // your code goes here
+    
+ 
 }
