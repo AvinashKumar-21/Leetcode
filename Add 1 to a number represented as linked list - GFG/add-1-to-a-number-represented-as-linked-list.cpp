@@ -46,31 +46,39 @@ struct Node
 class Solution
 {
     public:
-    int a=1;
     int c=0;
-    Node*fun(Node*head)
+    Node*help(Node*head)
     {
-        if(!head)
-        return head;
-        fun(head->next);
-        head->data=head->data+a+c;
+        if(!head->next)
+        {
+            head->data=head->data+1;
+            c=head->data/10;
+            head->data=head->data%10;
+            return head;
+        }
+        help(head->next);
+        head->data=head->data+c;
         c=head->data/10;
         head->data=head->data%10;
-        a=0;
         return head;
     }
     Node* addOne(Node *head) 
     {
-        head=fun(head);
+        if(!head)
+        return head;
+        // if(!head->next)
+        // {
+        //     head->data+=1;
+        //     return head;
+        // }
+        head=help(head);
         if(c!=0)
         {
-            Node*temp=new Node(c);
-            temp->next=head;
-            return temp;
+            Node*newHead=new Node(c);
+            newHead->next=head;
+            return newHead;
         }
         return head;
-        // Your Code here
-        // return head of list after adding one
     }
 };
 
