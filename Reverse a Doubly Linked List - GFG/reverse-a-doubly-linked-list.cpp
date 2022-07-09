@@ -98,7 +98,6 @@ struct Node
         
 };
 */
-
 Node* reverseDLL(Node * head)
 {
     Node*trail=NULL;
@@ -106,7 +105,7 @@ Node* reverseDLL(Node * head)
     {
         Node*temp=head->next;
         head->next=trail;
-        head->prev=temp; 
+        head->prev=temp;
         trail=head;
         head=temp;
     }
