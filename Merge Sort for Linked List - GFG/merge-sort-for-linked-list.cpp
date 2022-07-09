@@ -29,7 +29,7 @@ struct Node
 class Solution{
   public:
     //Function to sort the given linked list using Merge Sort.
-    Node*merge(Node*l1,Node*l2)
+    Node* merge(Node*l1,Node*l2)
     {
         if(!l1)
         return l2;
@@ -42,15 +42,14 @@ class Solution{
             if(l1->data>l2->data)
             {
                 trail->next=l2;
-                trail=l2;
                 l2=l2->next;
             }
             else
             {
                 trail->next=l1;
-                trail=l1;
                 l1=l1->next;
             }
+            trail=trail->next;
         }
         if(l1)
         trail->next=l1;
@@ -58,20 +57,21 @@ class Solution{
         trail->next=l2;
         return temp->next;
     }
+    
     Node*mid(Node*head)
     {
-        Node*fast=head,*slow=head;
+        Node*slow=head,*fast=head;
         while(fast->next && fast->next->next)
         {
-            fast=fast->next->next;
             slow=slow->next;
+            fast=fast->next->next;
         }
-        Node*temp=slow->next;
+        fast=slow->next;
         slow->next=NULL;
-        return temp;
+        return fast;
     }
     Node* mergeSort(Node* head) 
-    { 
+    {
         if(!head || !head->next)
         return head;
         Node*m=mid(head);
