@@ -49,13 +49,8 @@ void printList(struct node *node)
 class Solution
 {
     public:
-    node*tt;
-    node*th;
-    Solution()
-    {
-        tt=NULL;
-        th=NULL;
-    }
+    node*tt=NULL;
+    node*th=NULL;
     void helper(node*ele)
     {
         if(th==NULL)
@@ -71,23 +66,22 @@ class Solution
     }
     struct node *reverse (struct node *head, int k)
     { 
-        node*temp=new node(-1);
-        node*t=temp;
+        node*newHead=new node(-1);
+        node*temp=newHead;
         while(head)
         {
-            for(int i=0;i<k && head;i++)
+            for(int i=0;i<k &&head;i++)
             {
-                node*a=head->next;
+                node*temp=head->next;
                 head->next=NULL;
                 helper(head);
-                head=a;
+                head=temp;
             }
-            t->next=th;
-            t=tt;
-            th=NULL;
+            temp->next=th;
+            temp=tt;
             tt=NULL;
-        }
-        return temp->next;
+            th=NULL;
+        }return newHead->next;
     }
 };
 
