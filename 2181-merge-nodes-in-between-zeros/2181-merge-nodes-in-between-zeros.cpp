@@ -12,6 +12,8 @@ class Solution {
 public:
     ListNode* mergeNodes(ListNode* head) 
     {
+        if(!head)
+            return head;
         int val=0;
         ListNode*temp=new ListNode(-1);
         ListNode*link=temp;
