@@ -11,13 +11,13 @@ public:
         {
             for(int j=0;j<n;j++)
             {
-                if(m[i][j]!=t[i][j] && flag[0])
+                if(m[i][j]!=t[i][j])
                     ans[0]=false;
-                if(m[i][j]!=t[j][n-1-i] && flag[1])
+                if(m[i][j]!=t[j][n-1-i])
                     ans[1]=false;
-                if(m[i][j]!=t[n-1-i][n-1-j] && flag[2])
+                if(m[i][j]!=t[n-1-i][n-1-j])
                     ans[2]=false;
-                if(m[i][j]!=t[n-j-1][i] && flag[3])
+                if(m[i][j]!=t[n-j-1][i])
                     ans[3]=false;
             }
         }
