@@ -84,10 +84,10 @@ class Solution {
     //Function to reverse a linked list.
     reverseList(head)
     {
-        if(head==null)
+        if(!head)
         return head;
-        let trail=null;
-        while(head!=null)
+        let trail=null
+        while(head)
         {
             let temp=head;
             head=head.next;
