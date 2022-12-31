@@ -6,51 +6,39 @@ using namespace std;
 class Solution {
   public:
     // Function to find the number of islands.
-    vector<vector<int>>visited;
-    void fun(int i,int j,vector<vector<char>>grid)
+    vector<vector<bool>>v;
+    void fun(int i,int j,vector<vector<char>>& grid)
     {
-        visited[i][j]=1;
-        queue<pair<int,int>>st;
+        v[i][j]=true;
         int n=grid.size();
         int m=grid[0].size();
-        st.push({i,j});
-        while(!st.empty())
+        for(int a=-1;a<=1;a++)
         {
-            i=st.front().first;
-            j=st.front().second;
-            st.pop();
-            for(int minRow=-1;minRow<=1;minRow++)
+            for(int b=-1;b<=1;b++)
             {
-                for(int minCol=-1;minCol<=1;minCol++)
-                {
-                    int reqR=i-minRow;
-                    int reqC=j-minCol;
-                    if(reqR>=0 && reqR<n && reqC>=0 && reqC<m && grid[reqR][reqC]=='1' && visited[reqR][reqC]==0)
-                    {
-                        visited[reqR][reqC]=1;
-                        st.push({reqR,reqC});
-                    }
-                }
+                int newRow=i-a;
+                int newCol=j-b;
+                if(newRow>=0 && newRow<n && newCol>=0 && newCol<m && !v[newRow][newCol] && grid[newRow][newCol]=='1')
+                fun(newRow,newCol,grid);
             }
-            
         }
-
     }
     int numIslands(vector<vector<char>>& grid) 
     {
+        v.resize(grid.size(),vector<bool>(grid[0].size(),false));
         int ans=0;
-        visited.resize(grid.size(),vector<int>(grid[0].size(),0));
         for(int i=0;i<grid.size();i++)
         {
             for(int j=0;j<grid[i].size();j++)
             {
-                if(grid[i][j]=='1' && visited[i][j]==0)
+                if(!v[i][j] && grid[i][j]=='1')
                 {
                     fun(i,j,grid);
                     ans++;
                 }
             }
         }
+        
         return ans;
     }
 };
