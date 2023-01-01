@@ -6,39 +6,49 @@ using namespace std;
 class Solution {
   public:
     // Function to find the number of islands.
-    vector<vector<bool>>v;
-    void fun(int i,int j,vector<vector<char>>& grid)
+    vector<vector<int>>v;
+    void fun(int i,int j,vector<vector<char>>grid)
     {
-        v[i][j]=true;
-        int n=grid.size();
-        int m=grid[0].size();
-        for(int a=-1;a<=1;a++)
+        v[i][j]=1;
+        queue<pair<int,int>>q;
+        q.push({i,j});
+        while(!q.empty())
+        {
+            i=q.front().first;
+            j=q.front().second;
+            q.pop();
+            for(int a=-1;a<=1;a++)
         {
             for(int b=-1;b<=1;b++)
             {
-                int newRow=i-a;
-                int newCol=j-b;
-                if(newRow>=0 && newRow<n && newCol>=0 && newCol<m && !v[newRow][newCol] && grid[newRow][newCol]=='1')
-                fun(newRow,newCol,grid);
-            }
-        }
-    }
-    int numIslands(vector<vector<char>>& grid) 
-    {
-        v.resize(grid.size(),vector<bool>(grid[0].size(),false));
-        int ans=0;
-        for(int i=0;i<grid.size();i++)
-        {
-            for(int j=0;j<grid[i].size();j++)
-            {
-                if(!v[i][j] && grid[i][j]=='1')
+                int r=i-a;
+                int c=j-b;
+                if(r>=0 && r<grid.size() && c>=0 && c<grid[0].size() && grid[r][c]=='1' && v[r][c]==0)
                 {
-                    fun(i,j,grid);
-                    ans++;
+                    q.push({r,c});
+                    v[r][c]=1;
                 }
             }
         }
+        }
         
+    }
+    int numIslands(vector<vector<char>>& grid) 
+    {
+        v.resize(grid.size(),vector<int>(grid[0].size(),0));
+        int ans=0;
+        for(int i=0;i<grid.size();i++)
+        {
+            for(int j=0;j<grid[0].size();j++)
+            {
+                if(grid[i][j]=='1' && v[i][j]==0)
+                {
+                    fun(i,j,grid);
+                ans++;
+                }
+                
+            }
+        }
         return ans;
     }
 };
