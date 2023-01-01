@@ -24,7 +24,6 @@ class Solution
             }
         }
         q.push(s);
-        int curr=0;
         while(!q.empty())
         {
             s=q.front();
@@ -45,7 +44,7 @@ class Solution
                     {
                         grid[newR][newC]=2;
                         st.push({newR,newC});
-                        curr++;
+                        check--;
                     }
                 }
             }
@@ -56,7 +55,7 @@ class Solution
             }
             
         }
-        if(check!=curr)
+        if(check!=0)
         return -1;
         return ans;
     }
