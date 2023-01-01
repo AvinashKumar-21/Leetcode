@@ -11,25 +11,45 @@ void fun(int i,int j,vector<vector<int>>& image,int color,int curr)
 {
     v[i][j]=false;
     image[i][j]=color;
+    queue<pair<int,int>>q;
+    q.push({i,j});
+    while(!q.empty())
+    {
+        i=q.front().first;
+        j=q.front().second;
+        q.pop();
+        if(i-1>=0 && image[i-1][j]==curr && v[i-1][j])
+        {
+            v[i-1][j]=false;
+            image[i-1][j]=color;
+            q.push({i-1,j});
+        }
+        if(i+1<image.size() && image[i+1][j]==curr && v[i+1][j])
+        {
+            v[i+1][j]=false;
+            image[i+1][j]=color;
+            q.push({i+1,j});
+        }
+        if(j-1>=0 && image[i][j-1]==curr && v[i][j-1])
+        {
+            v[i][j-1]=false;
+            image[i][j-1]=color;
+            q.push({i,j-1});
+        }
+        if(j+1<image[0].size() && image[i][j+1]==curr && v[i][j+1])
+        {
+            v[i][j+1]=false;
+            image[i][j+1]=color;
+            q.push({i,j+1});
+        }
+    }
     
-    if(i-1>=0 && image[i-1][j]==curr && v[i-1][j])
-    fun(i-1,j,image,color,curr);
-    
-    if(i+1<image.size() && image[i+1][j]==curr && v[i+1][j])
-    fun(i+1,j,image,color,curr);
-    
-    if(j-1>=0 && image[i][j-1]==curr && v[i][j-1])
-    fun(i,j-1,image,color,curr);
-    
-    if(j+1<image[0].size() && image[i][j+1]==curr && v[i][j+1])
-    fun(i,j+1,image,color,curr);
 }
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) 
     {
         v.resize(image.size(),vector<bool>(image[0].size(),true));
         fun(sr,sc,image,newColor,image[sr][sc]);
         return image;
-        // Code here 
     }
 };
 
