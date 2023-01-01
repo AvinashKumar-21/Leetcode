@@ -12,15 +12,19 @@ class Solution
         int ans=0;
         queue<stack<pair<int,int>>>q;
         stack<pair<int,int>>s;
+        int check=0;
         for(int i=0;i<grid.size();i++)
         {
             for(int j=0;j<grid[0].size();j++)
             {
                 if(grid[i][j]==2)
                 s.push({i,j});
+                if(grid[i][j]==1)
+                check++;
             }
         }
         q.push(s);
+        int curr=0;
         while(!q.empty())
         {
             s=q.front();
@@ -41,24 +45,19 @@ class Solution
                     {
                         grid[newR][newC]=2;
                         st.push({newR,newC});
+                        curr++;
                     }
                 }
             }
             if(st.size()!=0)
             {
                 q.push(st);
-            ans++;
+                ans++;
             }
             
         }
-        for(int i=0;i<grid.size();i++)
-        {
-            for(int j=0;j<grid[0].size();j++)
-            {
-                if(grid[i][j]==1)
-                return -1;
-            }
-        }
+        if(check!=curr)
+        return -1;
         return ans;
     }
 };
